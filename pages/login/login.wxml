@@ -1,0 +1,11 @@
+<image src="../../images/start_img.png" class="imgBg" style="width:100vw;height:100vh"></image>
+  <image src="../../images/icon_img.png" class="imgIcon"></image>
+<view class="allView">
+
+  <view class="marTopView"></view>
+      <input class="inputView" bindinput='inputTilte1' placeholder-style="color:#ffffff"  placeholder="请 输 入 用 户 名"/>
+      <input class="inputView" bindinput='inputTilte2' placeholder-style="color:#ffffff"  placeholder="请 输 入 密 码"/>
+      <button  class="btnView" bindtap="onLogin" style="width:90%" > 登 录</button>
+</view>
+<view class='anit {{show? "show": ""}}'>{{showMsg}}</view>
+

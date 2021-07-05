@@ -1,0 +1,52 @@
+<button class='btnAddView' bindtap="onAddUser" style="width:80%" >
+    <image class='btnImg' src='../../images/homeImg1.png'></image>
+    <view>添加用户</view>
+ </button>
+
+ <view class="horBoxView" >
+
+  <picker class="pickerView" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="horTopView">
+      <text class="textBlue"> 所属部门{{array[index]}}</text>
+      <image class="imgRightClass" src="../../images/img_right_go.png"></image>
+    </view>
+  </picker>
+
+  <picker class="pickerView" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+  <view class="horTopView">
+      <text class="textBlue"> 产品类型{{array[index]}}</text>
+      <image class="imgRightClass" src="../../images/img_right_go.png"></image>
+    </view>
+  </picker>
+
+  <picker class="pickerView" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+  <view class="horTopView">
+      <text class="textBlue"> 在线（7）{{array[index]}}</text>
+      <image class="imgRightClass" src="../../images/img_right_go.png"></image>
+    </view>
+  </picker>
+</view>
+
+<scroll-view class="scrollView" scroll-x="false" scroll-y="true" style="height:{{viewH}}px">
+  <view wx:for="{{userList}}" data-index='{{index}}' wx:for-item="item" bindtap='itemClick'>
+    <view class='itemView'>
+      <view class="horView3">
+        <text class='iTextTitle'>李宏杰</text>
+        <text class='cTextType1'>在线</text>
+
+      </view>
+
+    <view class="horView2">
+      <view class="verView2">
+        <text class='iTextName'>经销商</text>
+        <text class='iTextName'>李宏杰</text>
+      </view>
+   <image src="../../images/img_device_1.png" class="imgSee1"></image>
+   <image src="../../images/img_device_2.png" class="imgSee2"></image>
+    </view>
+
+
+</view>
+<view class="linerView"></view>
+  </view>
+</scroll-view>

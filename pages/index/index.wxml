@@ -1,0 +1,17 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <block wx:if="{{canIUseOpenData}}">
+      <view class="userinfo-avatar" bindtap="bindViewTap">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <open-data type="userNickName"></open-data>
+    </block>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar"  mode="cover"></image>
+      <text class="userinfo-nickname"></text>
+    </block>
+  </view>
+  <image src="../../images/start_img.png" class="imgBg" style="width:100vw;height:100vh"></image>
+  <image src="../../images/icon_img.png" class="imgIcon"></image>
+</view>

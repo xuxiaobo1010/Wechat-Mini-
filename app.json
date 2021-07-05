@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/deviceList/deviceList",
+    "pages/index/index",
+    "pages/home/home",
+    "pages/userList/userList",
+    "pages/addUser/addUser",
+    "pages/map/map",
+    "pages/addDevice/addDevice",
+    "pages/logs/logs",
+    "pages/login/login"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1c86fb",
+    "navigationBarTitleText": "明诚物联网",
+    "navigationBarTextStyle": "white"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

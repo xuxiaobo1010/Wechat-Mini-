@@ -1,0 +1,44 @@
+<button class='btnAddView' bindtap="onAddUser" style="width:80%" >
+    <image class='btnImg' src='../../images/homeImg1.png'></image>
+    <view>添加用户</view>
+ </button>
+ <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="horTopView">
+      <text class="textBlue"> 选择账号所属部门　　　{{array[index]}}</text>
+      <image class="imgRightClass" src="../../images/img_right_go.png"></image>
+    </view>
+  </picker>
+<view class="linerView"></view>
+
+<scroll-view scroll-x="false" scroll-y="true" style="height:{{viewH}}px">
+  <view wx:for="{{userList}}" data-index='{{index}}' wx:for-item="item" bindtap='itemClick'>
+    <view class='itemView'>
+      <view class="horView1">
+        <text class='cTextType1'>经销商</text>
+        <text class='iTextTitle'>李宏杰</text>
+      </view>
+
+    <view class="horView2">
+      <view class="verView2">
+        <text class='iTextName'>经销商</text>
+        <text class='iTextName'>李宏杰</text>
+      </view>
+    <text class='iText2'>启用账号 </text>
+    <switch checked="{{switch1Checked}}" color="#1890ff" bindchange="switch1Change"/>
+    </view>
+
+    <view class="horView3">
+    <button class='btn1' bindtap="onRefresh" >
+    <image class='btnImg' src='../../images/homeImg1.png'></image>
+    <view>设备管理</view>
+ </button>
+ <view class="width10View"></view>
+ <button class='btn1' bindtap="onUpdateUser">
+    <image class='btnImg' src='../../images/homeImg2.png'></image>
+    <view>编辑用户</view>
+</button>
+  </view>
+</view>
+<view class="linerView"></view>
+  </view>
+</scroll-view>

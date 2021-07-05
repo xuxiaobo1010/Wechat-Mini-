@@ -1,0 +1,25 @@
+<picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="horTopView">
+      <text class="textBlue"> 选择账号所属部门　　　{{array[index]}}</text>
+      <image class="imgRightClass" src="../../images/img_right_go.png"></image>
+    </view>
+  </picker>
+
+<view class="linerView"></view>
+
+<view class="horView">
+  <text class="textName">姓　　名:</text>
+  <input class="inputName" value="{{mName}}" confirm-type="next" bindinput='inputTilte1' auto-focus placeholder=""/>
+</view>
+
+<view class="linerView"></view>
+
+<view class="horView">
+  <text class="textName">手机号码:</text>
+  <input class="inputName" value="{{mPhone}}" type="number" bindinput='inputTilte2' confirm-type="done" maxlength="11"  placeholder=""/>
+</view>
+
+<button class='btnAddView' bindtap="onSaveUser" style="width:90%" >
+    <view>保存</view>
+ </button>
+ <view class='anit {{show? "show": ""}}'>{{showMsg}}</view>
