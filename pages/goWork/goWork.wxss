@@ -1,0 +1,136 @@
+page{
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+.linView{
+  height: 1px;
+  width: 100%;
+  background-color: #f5f7f9;
+}
+.textView{
+  height: 40px;
+  line-height: 40px;
+  text-align: left;
+  align-items: center;
+}
+.horView2{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+}
+.horTopClass3 {
+  width: 100%;
+  display: flex;
+  margin-top: 10px;
+}
+
+.areaView {
+  height: 100px;
+  width: 65%;
+  border-radius: 6px;
+  margin-left: 10px;
+  background-color: #f5f7f9;
+  color: rgba(136, 136, 136, 100);
+  font-size: 14px;
+  text-align: left;
+  border: 1px solid rgba(230, 230, 230, 57);
+  padding: 10px;
+}
+
+
+.rg1 {
+  width:80%;
+  letter-spacing: 5px;
+  line-height: 28px;
+}
+radio .wx-radio-input{
+  flex: none;
+  margin-left: 20px;
+}
+
+/*选择图片View*/
+ 
+.addImv {
+  background-color: white;
+  /* border: 1px dashed gray; */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 5rpx;
+}
+ 
+.upImv {
+  background-color: white;
+  width: 100%;
+  margin-top: 5rpx;
+}
+ 
+.upImv_text {
+  font-size: 30rpx;
+  margin-left: 20rpx;
+  padding-top: 20rpx;
+}
+ 
+/*添加图片*/
+ 
+.addImv .chooseView {
+  width: 180rpx;
+  height: 180rpx;
+  margin: 20rpx 20rpx;
+  background-color: #f2f6f9;
+  border: 1px dashed lightgray;
+  text-align: center;
+  line-height: 180rpx;
+  /* padding: 0rpx 7rpx; */
+  border-radius: 5px;
+  margin-left: 40rpx;
+}
+ 
+.addImv .chooseImv {
+  width: 50rpx;
+  height: 50rpx;
+}
+ 
+/*已选择的图片*/
+ 
+.addImv .upFile {
+  width: 180rpx;
+  height: 180rpx;
+  position: relative;
+  padding: 0rpx 7rpx;
+  margin-left: 40rpx;
+  border: 1px solid #c0ccda;
+}
+ 
+.addImv .upFile .itemImv {
+  width: 180rpx;
+  height: 180rpx;
+}
+ 
+.addImv .upFile .closeImv {
+  position: absolute;
+  right: 0rpx;
+  top: 0rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.btnView{
+  height: 40px;
+  margin-top: 20px;
+line-height: 18px;
+border-radius: 4px 4px 4px 4px;
+background-color: #84d3be;
+text-align: center;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 15px;
+margin-left: 10px;
+color: #ffffff;
+}

@@ -1,0 +1,4 @@
+<block wx:for="{{dataList}}">
+<image  mode='scaleToFill' wx:if="{{item.type == 'image'}}" class="imgView" src="{{item.source}}" bindload="loadImgSucc"></image>
+<text class="text"  wx:if="{{item.type == 'text'}}" style="margin-top:{{item.top}}px;margin-left:{{item.left}}px">{{item.text}}</text>
+</block>

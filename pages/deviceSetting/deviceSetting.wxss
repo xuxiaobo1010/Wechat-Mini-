@@ -1,0 +1,194 @@
+.horView2{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  box-sizing:border-box;
+}
+
+.horView3{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  height: 60px;
+  box-sizing:border-box;
+  
+}
+
+.btnAddView{
+  height: 35px;
+  margin-top: 10px;
+line-height: 18px;
+border-radius: 4px 4px 4px 4px;
+background-color: #84d3be;
+text-align: center;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 25rpx;
+margin-left: 10px;
+color: #ffffff;
+margin-bottom: 30px;
+}
+
+/* 设置不可用状态的背景色 */
+input[disabled]{
+  background-color: #ccc;
+}
+
+picker[disabled]{
+  background-color: #ccc;
+}
+
+.verView3{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.verView2{
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.iTextTitle{
+  height: 40px;
+  color: #101010;
+  font-size: 16px;
+  line-height: 40px;
+  margin-left: 5px;
+  text-align: left;
+  }
+  .iTextTitle2{
+    width: 30%;
+    height: 40px;
+    color: #101010;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: right;
+    }
+.iTextName{
+  font-size: 13px;
+  color: #838181;
+  margin-left: 5px;
+  line-height: 20px;
+}
+.cTextType1{
+  width: 45px;
+  height: 20px;
+  font-size: 12px;
+  text-align: center;
+  color: #02603A 100%;
+  margin-right: 10px;
+  line-height: 20px;
+  margin-left: 5px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-right: 7px;
+  padding-left: 7px;
+  border-radius: 6px 5px 6px 6px;
+background-color: #2FC589;
+}
+
+.cTextType2{
+  width: 45px;
+  height: 20px;
+  font-size: 12px;
+  text-align: center;
+  color: #FC4868 ;
+  margin-right: 10px;
+  line-height: 20px;
+  margin-left: 5px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-right: 7px;
+  padding-left: 7px;
+  border-radius: 6px 5px 6px 6px;
+background-color: #f6d8e0;
+}
+.btn1{
+  height: 35px;
+  line-height: 18px;
+  border-radius: 4px 4px 4px 4px;
+  background-color: #84d3be;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25rpx;
+  margin-left: 10px;
+  color: #ffffff;
+  }
+
+  .btn2{
+    height: 35px;
+    line-height: 18px;
+    border-radius: 4px 4px 4px 4px;
+    border: 1px solid rgba(61, 141, 255, 100);
+    background-color: #ffffff;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25rpx;
+    margin-left: 10px;
+    color: #84d3be;
+    margin-top: 20px;
+    }
+
+    .btnImg1{
+      width: 20px;
+      height: 15px;
+      margin-right: 2.5px;
+    }
+
+.btnImg {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.btn1::after {
+  border: 0; 
+}
+
+.lineView{
+  height: 10px;
+  background-color: #f5f7fa;
+}
+.cascaderView{
+  height: 300px;
+}
+
+.pickerView{
+  padding: 10px;
+  width: 70%;
+  margin-left: 10px;
+  border: 2rpx solid #ddd;
+  border-radius: 6rpx;
+}
+.textView{
+  padding: 10px;
+  width: 70%;
+  line-height: 20px;
+  margin-left: 10px;
+  border: 2rpx solid #ddd;
+  border-radius: 6rpx;
+}
+
+.imgRightClass{
+  height: 12px;
+  width: 12px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.horTopView{
+  display: flex;
+  justify-content: space-between;
+}

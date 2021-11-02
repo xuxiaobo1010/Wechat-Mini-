@@ -14,6 +14,32 @@ Page({
 
   onLoad() {
    this.onLogin()
+   //this.onLoginTest();
+  },
+  
+  onLoginTest:function(){
+    var that = this;
+    wx.request({
+      url: app.globalData.httpUrl+'iotapi/login', //仅为示例，并非真实的接口地址
+      method: 'POST',
+      data: {
+        password: "dgiot_admin",
+        username: "dgiot_admin"
+      },
+      header: {
+        'content-type': 'text/plain' // 默认值
+      },
+      success(res) {
+     
+         app.globalData.token = res.data.sessionToken
+         app.globalData.tag = res.data.tag
+         app.globalData.info = res.data
+         wx.switchTab({
+           //url: '../../pages/home/home'
+           url: '../../pages/goWork/goWork'
+         })
+      }
+    })
   },
 
   onLogin:function(){
@@ -22,16 +48,31 @@ Page({
         if (res.code) {
           //发起网络请求
           wx.request({
-            url: 'http://1.117.219.33/iotapi/wechat?jscode='+res.code,
+            url: app.globalData.httpUrl+'iotapi/wechat?jscode='+res.code,
             success(res) {
               console.log(res)
-              if( res.statusCode != 200 ){
+              if( res.statusCode == 200){
+                if(  res.data.status == "unbind"){
                 setTimeout(function () {
-                  wx.navigateTo({
-                    url: '../../pages/login/login'
+                  wx.redirectTo({
+                    url: '../../pages/login/login?openid='+res.data.openid
                   })
                 }, 2000)
+              }else{
+                app.globalData.token = res.data.sessionToken
+                app.globalData.tag = res.data.tag
+                app.globalData.info = res.data
+                wx.switchTab({
+                  url: '../../pages/home/home'
+                })
               }
+            }else{
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../../pages/login/login?openid='+res.data.openid
+                })
+              }, 2000)
+            }
             }
           })
         } else {

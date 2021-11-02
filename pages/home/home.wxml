@@ -1,70 +1,70 @@
 <view class="box">
-<view class="horView">
-    <text class="textTitle">明诚物联云平台</text>
+  <view class="horView">
+    <text class="textTitle">质云平台</text>
     <view class="horView2">
-    <image class="homeImg1" src='../../images/homeImg1.png'></image>
-    <view class="homeViewRed"></view>
-    <image class="homeImg2" bindtap="onAddDevice" src='../../images/homeImg2.png'></image>
-  </view>
+      <image class="homeImg1" bindtap="goTab3" src='../../images/homeImg1.png'></image>
+      <view class="homeViewRed" wx:if="{{unPanalarmCount > 0}}"></view>
+      <image class="homeImg2" bindtap="onAddDevice" src='../../images/homeImg2.png'></image>
+    </view>
   </view>
 
-  <view class="horBoxView">
+  <view class="horBoxView" bindtap="onDeviceList">
     <canvas canvas-id="ringCanvas" class="homeCanvas" bindtouchstart="touchHandler"></canvas>
     <view class="verView">
-      <text class="textGreen">7</text>
+      <text class="textGreen">{{onlineCount}}</text>
       <text class="textTitle2">在线设备</text>
     </view>
-    
+
     <view class="verView">
-      <text class="textRed">3</text>
+      <text class="textRed">{{offlineCount}}</text>
       <text class="textTitle2">离线设备</text>
     </view>
     <view class="verView">
-      <text class="textGrey">1</text>
+      <text class="textGrey">{{notificationCount}}</text>
       <text class="textTitle2">报警设备</text>
     </view>
   </view>
 
   <view class="horView">
-    <button class='btn1' hover-class="hoverGrey" bindtap="onAddDevice" >
-    <image class='btnImg' src='../../images/homeImg1.png'></image>
-    <view>添加设备</view>
- </button>
- <view class="width10View"></view>
- <button class='btn1' hover-class="hoverGrey" bindtap="onMap">
-    <image class='btnImg' src='../../images/homeImg2.png'></image>
-    <view>设备地图</view>
-</button>
+    <button class='btn1' hover-class="hoverGrey" bindtap="onAddDevice">
+      <image class='btnImg' src='../../images/home_icon_1.png'></image>
+      <view>添加设备</view>
+    </button>
+    <view class="width10View"></view>
+    <button class='btn1' hover-class="hoverGrey" bindtap="onMap">
+      <image class='btnImg' src='../../images/home_icon_2.png'></image>
+      <view>设备地图</view>
+    </button>
   </view>
 
   <view class="horView">
-    <button class='btn1'  hover-class="hoverGrey" bindtap="onUser" >
-    <image class='btnImg' src='../../images/homeImg1.png'></image>
-    <view>用户管理</view>
- </button>
- <view class="width10View"></view>
- <button class='btn1' hover-class="hoverGrey" bindtap="onMap">
-    <image class='btnImg' src='../../images/homeImg2.png'></image>
-    <view>维保工单</view>
-</button>
+    <button class='btn1' hover-class="hoverGrey" bindtap="onUser">
+      <image class='btnImg' src='../../images/home_icon_3.png'></image>
+      <view>用户管理</view>
+    </button>
+    <view class="width10View"></view>
+    <button class='btn1' hover-class="hoverGrey" bindtap="onWork">
+      <image class='btnImg' src='../../images/home_icon_4.png'></image>
+      <view>维保工单</view>
+    </button>
   </view>
 
 
   <!-- 轮播图 -->
- <swiper class="swiper" indicator-dots="{{indicatorDots}}"
- autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#ffffff" circular="{{circular}}">
- <block wx:for="{{imgUrls}}" wx:key="id">
- <swiper-item>
- <image src="{{item}}" class="slide-image" />
- </swiper-item>
- </block>
- </swiper>
+  <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}"
+    duration="{{duration}}" indicator-active-color="#ffffff" circular="{{circular}}">
+    <block wx:for="{{carousel}}" wx:key="id">
+      <swiper-item>
+        <image bindtap="goWeb" data-index="{{index}}" src="{{item.imgurl}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
 
- <view class="horView">
- <button hover-class="button-hover" class='btn2'   style="width:100vw">
-   <view class="textTitle3">50</view>
-    <text  class="textTitle4">未处理报警数</text>
- </button>
- </view>
-
+  <view class="horView">
+    <button hover-class="button-hover" class='btn2' bindtap="goTab3" style="width:100vw">
+      <view class="textTitle3">{{unPanalarmCount}}</view>
+      <text class="textTitle4">未处理报警数</text>
+    </button>
   </view>
+
+</view>

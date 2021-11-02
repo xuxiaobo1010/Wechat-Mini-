@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "设备地图"
+  "navigationBarTitleText": "设备地图",
+  "usingComponents": {
+    "wux-popup": "../../dist/popup/index"}
 }

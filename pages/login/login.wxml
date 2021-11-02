@@ -1,5 +1,4 @@
-<image src="../../images/start_img.png" class="imgBg" style="width:100vw;height:100vh"></image>
-  <image src="../../images/icon_img.png" class="imgIcon"></image>
+
 <view class="allView">
 
   <view class="marTopView"></view>

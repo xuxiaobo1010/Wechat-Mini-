@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "工单详情",
+  "usingComponents": {
+    "wux-grids": "../../dist/grids/index",
+    "wux-grid": "../../dist/grid/index",
+    "wux-steps": "../../dist/steps/index",
+    "wux-step": "../../dist/step/index",
+    "wux-cell-group": "../../dist/cell-group/index",
+    "wux-cell": "../../dist/cell/index",
+    "wux-cascader": "../../dist/cascader/index"
+  }
+}

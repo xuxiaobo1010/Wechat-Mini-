@@ -1,0 +1,53 @@
+<view class="horView2">
+  <view class="verView2">
+    <text class='iTextTitle'>{{deviceName}}</text>
+    <text class='iTextName'>设备编号：{{deviceCode}}</text>
+    <text class='iTextName'>所属单位：{{deviceCompany}}</text>
+    <text class='iTextName'>位置：{{deviceAddress}}</text>
+    <view class="horView3">
+      <text class='iTextName'>状态：</text>
+      <text class='cTextType1' wx:if="{{ deviceType =='在线'}}">在线</text>
+      <text class='cTextType2' wx:if="{{ deviceType =='离线'}}">离线</text>
+    </view>
+  </view>
+
+  <view class="verView3">
+    <button class='btn1' style="width:130px" bindtap="onOpen1">
+      <image class='btnImg1' src='../../images/img_transfer.png'></image>
+      <view>迁移设备</view>
+    </button>
+    <view class="width10View"></view>
+    <button class='btn2' style="width:130px" data-index='{{index}}' bindtap="goWork">
+      <image class='btnImg' src='../../images/img_work.png'></image>
+      <view>发起工单</view>
+    </button>
+  </view>
+</view>
+
+<view class="lineView"></view>
+
+<view wx:for="{{paramsList}}" wx:key="index">
+  <view class="horView3" wx:if="{{item.type == 'enum' }}">
+    <text class="iTextTitle2"> {{item.name}}:</text>
+    <picker class="pickerView"  disabled="{{item.readonly}}" data-index="{{index}}" bindchange="bindPickerChange" range-key="{{'attributevalue'}}"
+      value="{{item.specs.attributevalue}}" range="{{item.specs}}">
+      <view class="horTopView">
+        {{ item.specs[item.value].attributevalue}}
+        <image class="imgRightClass" wx:if="{{!item.readonly}}" src="../../images/img_right_go.png"></image>
+      </view>
+    </picker>
+  </view>
+
+  <view class="horView3" wx:if="{{item.type != 'enum' && item.type != 'button'}}">
+    <text  class="iTextTitle2"> {{item.name}}:</text>
+    <input class="textView" disabled="{{item.readonly}}"  data-index="{{index}}"   bindinput="bindinput" type='{{item.type}}' value="{{item.value}}{{item.unit}}"></input>
+  </view>
+
+</view>
+
+<button class='btnAddView' bindtap="onSaveDevice" style="width:80%" >
+    <view>保存</view>
+ </button>
+
+<wux-cascader wux-class="cascaderView" visible="{{ visible1 }}" default-value="{{ value1 }}" title="所属部门"
+  options="{{ options1 }}" bind:close="onClose1" bind:change="onChange1" />

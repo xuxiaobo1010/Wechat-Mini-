@@ -6,6 +6,16 @@
   align-items: center;
   color: #aaa;
 }
+.container{
+  background-color: #84D3BE;
+  height: 100vh;
+}
+
+.textView{
+line-height: 50vh;
+color: #fff;
+font-size: 20px;
+}
 
 .userinfo-avatar {
   overflow: hidden;

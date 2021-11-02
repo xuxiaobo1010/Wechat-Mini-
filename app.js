@@ -14,6 +14,16 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    info:'',
+    token:'',
+    productList:[],
+    departmentList:[],
+    title1:'所有部门',
+    toUser:false,
+    // httpUrl:'http://1.117.219.33/',
+   // httpUrl:'https://flow.hzmctech.com/',
+   httpUrl:'https://prod.dgiotcloud.com/',
+    tag:'',
   }
 })

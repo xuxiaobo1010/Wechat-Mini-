@@ -7,14 +7,18 @@ Page({
    */
   data: {
     mCode:'',
-    mPwd:''
+    mPwd:'',
+    openid:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var _this = this;
+    _this.setData({
+      openid:options.openid,
+    })
   },
 
   /**
@@ -63,29 +67,36 @@ onLogin:function(){
   }
 
   wx.request({
-    url: 'http://47.105.106.54/iotapi/login', //仅为示例，并非真实的接口地址
+    url: app.globalData.httpUrl+'iotapi/wechat', //仅为示例，并非真实的接口地址
     method: 'POST',
     data: {
-      password: that.data.mCode,
-      username: that.data.mPwd
+      openid:that.data.openid,
+      password: that.data.mPwd,
+      username: that.data.mCode
     },
     header: {
       'content-type': 'text/plain' // 默认值
     },
     success(res) {
+
+      if( res.data.error == that.data.mCode+'is bind' ){
+        that.anniu("该账号已被其他账户绑定");
+        return
+      }
+
      if( res.data.sessionToken == null ){
       that.anniu("用户名或密码错误，请重试");
-
-      wx.navigateTo({
-        url: '../../pages/home/home'
-      })
-
       return;
      }
       that.setData({
         sessionToken: res.data.sessionToken,
       }),
-      wx.navigateBack()
+      app.globalData.token = res.data.sessionToken
+      app.globalData.tag = res.data.tag
+      app.globalData.info = res.data
+      wx.switchTab({
+        url: '../../pages/home/home'
+      })
     }
   })
 

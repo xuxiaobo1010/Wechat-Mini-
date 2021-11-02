@@ -1,153 +1,324 @@
 // pages/home/home.js
 var wxCharts = require('../../utils/wxcharts.js');
 var ringChart = null;
+const app = getApp()
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    nunBerZ:7,
-    imgUrls: [
-      'https://gw.alicdn.com/tfs/TB1KE6rkwoQMeJjy1XaXXcSsFXa-440-180.jpg',
-      'https://gtd.alicdn.com/tfscom/TB1gotjX21TBuNjy0Fjwu1jyXXa',
-      'https://gtd.alicdn.com/tfscom/TB1KSusKeOSBuNjy0FdSuvDnVXa'
-      ],
-      indicatorDots: true, // 是否显示面板指示点
-      autoplay: true, // 是否自动切换
-      interval: 5000, // 自动切换时间间隔
-      duration: 500, // 滑动动画时长
-      circular: true, // 是否采用衔接滑动
-  },
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        token: '',
+        unPanalarmCount: '',
+        offlineCount: '',
+        notificationCount: '',
+        onlineCount: '',
+        panalarmDevice: '',
+        carousel: [],
+        indicatorDots: true, // 是否显示面板指示点
+        autoplay: true, // 是否自动切换
+        interval: 5000, // 自动切换时间间隔
+        duration: 500, // 滑动动画时长
+        circular: true, // 是否采用衔接滑动
+    },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        var that = this;
+        that.setData({
+            token: options.token
+        })
 
-  },
 
-  onReady: function (e) {
-    var that = this;
-    ringChart = new wxCharts({
-        animation: true,
-        canvasId: 'ringCanvas',
-        type: 'ring',
-        extra: {
-            ringWidth: 8,
-            pie: {
-                offsetAngle: 45
+
+    },
+
+    onReady: function (e) {
+
+
+    },
+
+
+    onMsg: function () {
+        if (wx.requestSubscribeMessage) {
+            wx.requestSubscribeMessage({
+                tmplIds: ['_g3WZTy50e6EtOBE2AqDrDMc1IbP8Osxirsz72-Nqlk'],
+                success(res) {
+                    console.log("订阅了" + res);
+                },
+                fail(res) {
+                    console.log(res);
+                }
+            })
+        } else {
+            uni.showModal({
+                title: '提示',
+                content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。',
+                showCancel: false,
+                success(res) {
+                    console.log({});
+                }
+            });
+        }
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+        var that = this;
+        wx.showLoading({
+            title: '请求中',
+        })
+        that.onProduct()
+        that.onReqRole()
+        wx.request({
+            url: app.globalData.httpUrl + 'iotapi/wechat_index',
+            header: {
+                'content-type': 'application/json', // 默认值
+                'sessionToken': app.globalData.token //读取cookie // 默认值
+            },
+            success(res) {
+                wx.hideLoading()
+                if (res.statusCode == 200) {
+                    that.setData({
+                        carousel: res.data.carousel,
+                        unPanalarmDevice: res.data.unPanalarmDevice,
+                        offlineCount: res.data.offlineCount,
+                        notificationCount: res.data.notificationCount,
+                        onlineCount: res.data.onlineCount,
+                        unPanalarmCount: res.data.unPanalarmCount,
+                    })
+
+                    var serList = []
+                    var seriesList = [{
+                        name: '在线数',
+                        data: res.data.onlineCount,
+                        color: '#2FC589',
+                        stroke: false
+                    }, {
+                        name: '离线数',
+                        data: res.data.offlineCount,
+                        color: '#e44d44',
+                        stroke: false
+                    }, {
+                        name: '报警数',
+                        data: res.data.notificationCount,
+                        color: '#99a3bb',
+                        stroke: false
+                    }]
+                    if (res.data.onlineCount == 0) {
+                        seriesList[0].data = 0.0001
+                    }
+                    serList.push(seriesList[0])
+
+                    if (res.data.offlineCount == 0) {
+                        seriesList[1].data = 0.0001
+                    }
+                    serList.push(seriesList[1])
+
+                    if (res.data.panalarmDevice = 0) {
+                        seriesList[2].data = 0.0001
+                    }
+                    serList.push(seriesList[2])
+
+
+                    console.log(serList)
+                    ringChart = new wxCharts({
+                        animation: true,
+                        canvasId: 'ringCanvas',
+                        type: 'ring',
+                        extra: {
+                            ringWidth: 8,
+                            pie: {
+                                offsetAngle: 45
+                            }
+                        },
+                        title: {
+                            name: '设备总数',
+                            color: '#000000',
+                            fontSize: 12
+                        },
+                        subtitle: {
+                            name: res.data.deviceCount,
+                            color: '#000000',
+                            fontSize: 25
+                        },
+                        series: serList,
+                        disablePieStroke: true,
+                        width: 130,
+                        height: 130,
+                        dataLabel: false,
+                        legend: false,
+                        background: '#f5f5f5',
+                        padding: 0,
+
+                    });
+                    // ringChart.addEventListener('renderComplete', () => {
+                    //     console.log('renderComplete');
+                    // });
+                    // setTimeout(() => {
+                    //     ringChart.stopAnimation();
+                    // }, 500);
+
+                }
             }
-        },
-        title: {
-            name: '设备总数',
-            color: '#000000',
-            fontSize: 11
-        },
-        subtitle: {
-            name: '10',
-            color: '#000000',
-            fontSize: 25
-        },
-        series: [{
-            name: '在线数',
-            data: that.data.nunBerZ,
-            color:'#2FC589',
-            stroke: false
-        }, {
-            name: '离线数',
-            data: 3,
-            color:'#e44d44',
-             stroke: false
-        }, {
-            name: '报警数',
-            data: 1,
-            color:'#99a3bb',
-             stroke: false
-        }],
-        disablePieStroke: true,
-        width: 130,
-        height: 130,
-        dataLabel: false,
-        legend: false,
-        background: '#f5f5f5',
-        padding: 0,
+        })
 
-    });
-    ringChart.addEventListener('renderComplete', () => {
-        console.log('renderComplete');
-    });
-    setTimeout(() => {
-        ringChart.stopAnimation();
-    }, 500);
-},
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+    },
 
-  },
+    goWeb: function (e) {
+        var that = this;
+        that.onMsg();
 
-   /**
-    * 跳转到添加设备
-    */
-   onAddDevice:function(){
-    wx.navigateTo({
-        url: '../../pages/addDevice/addDevice'
-      })
-   },
+        var mIndex = e.target.dataset.index
+        wx.navigateTo({
+            url: '../../pages/webview/webview?newUrl=' + that.data.carousel[mIndex].webUrl
+        })
+    },
 
-   /**
-    * 跳转到地图
-    */
-   onMap:function(){
-    wx.navigateTo({
-        url: '../../pages/map/map'
-      })
-   },
+    onDeviceList: function () {
+        var that = this;
+        that.onMsg();
 
-   /**
-    * 跳转到用户管理
-    */
-   onUser:function(){
-    wx.navigateTo({
-        url: '../../pages/userList/userList'
-      })
-   },
+        wx.switchTab({
+            url: '../../pages/deviceList/deviceList'
+        })
+    },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+    goTab3: function () {
+        var that = this;
+        that.onMsg();
+        wx.switchTab({
+            url: '../../pages/alarm/alarm'
+        })
+    },
 
-  },
+    /**
+     * 跳转到添加设备
+     */
+    onAddDevice: function () {
+        var that = this;
+        that.onMsg();
+        wx.navigateTo({
+            url: '../../pages/addDevice/addDevice'
+        })
+    },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
+    /**
+     * 跳转到地图
+     */
+    onMap: function () {
+        var that = this;
+        that.onMsg();
+        wx.navigateTo({
+            url: '../../pages/map/map'
+        })
+    },
 
-  },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
+    /**
+     * 跳转到工作
+     */
+    onWork: function () {
+        var that = this;
+        that.onMsg();
+        wx.navigateTo({
+            url: '../../pages/work/work'
+        })
+    },
 
-  },
+    /**
+     * 跳转到用户管理
+     */
+    onUser: function () {
+        var that = this;
+        that.onMsg();
+        wx.navigateTo({
+            url: '../../pages/userList/userList'
+        })
+    },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
+    /**
+     * 获取所有部门
+     */
+    onReqRole: function () {
+        var that = this;
+        wx.request({
+            url: app.globalData.httpUrl + 'iotapi/roletree',
+            header: {
+                'content-type': 'application/json', // 默认值
+                'sessionToken': app.globalData.token //读取cookie // 默认值
+            },
+            success(res) {
+                wx.hideLoading()
+                var mTimeList = res.data.results;
+                for (let i = 0; i < mTimeList.length; i++) {
+                    mTimeList[i].value = mTimeList[i].label
+                }
+                app.globalData.departmentList = mTimeList
+            }
+        })
+    },
 
-  },
+    /**
+     * 获取产品类型
+     */
+    onProduct: function () {
+        wx.request({
+            url: app.globalData.httpUrl + 'iotapi/classes/Product?count=objectId&order=-updatedAt&limit=1000&skip=0&keys=name',
+            header: {
+                'content-type': 'application/json', // 默认值
+                'sessionToken': app.globalData.token //读取cookie // 默认值
+            },
+            success(res) {
+                if (res.statusCode == 200) {
+                    app.globalData.productList = res.data.results
+                }else if(res.statusCode == 401){
+                    wx.reLaunch({
+                        url: '../../pages/index/index' 
+                      })
+                   }
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+            }
+        })
+    },
 
-  }
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () {
+
+    },
+
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function () {
+
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
+
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () {
+
+    }
 })

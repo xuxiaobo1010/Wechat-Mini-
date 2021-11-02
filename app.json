@@ -1,20 +1,63 @@
 {
   "pages": [
-    "pages/deviceList/deviceList",
     "pages/index/index",
     "pages/home/home",
+    "pages/testing/testing",
+    "pages/zutai/zutai",
+    "pages/goWork/goWork",
+    "pages/work/work",
+    "pages/deviceList/deviceList",
     "pages/userList/userList",
     "pages/addUser/addUser",
     "pages/map/map",
+    "pages/deviceInfo/deviceInfo",
     "pages/addDevice/addDevice",
     "pages/logs/logs",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/alarm/alarm",
+    "pages/deviceSetting/deviceSetting",
+    "pages/editUser/editUser",
+    "pages/webview/webview"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#1c86fb",
-    "navigationBarTitleText": "明诚物联网",
+    "navigationBarBackgroundColor": "#84D3BE",
+    "navigationBarTitleText": "质云平台",
     "navigationBarTextStyle": "white"
+  },
+  "permission":{
+    "scope.userLocation":{
+      "desc":"获取当前位置"
+    }
+  },
+  "tabBar": {
+    "selectedColor": "#84D3BE",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/icon_1_bom.png",
+        "selectedIconPath": "images/icon_1_top.png"
+      },
+      {
+        "pagePath": "pages/testing/testing",
+        "text": "检测",
+        "iconPath": "images/icon_1_bom.png",
+        "selectedIconPath": "images/icon_1_top.png"
+      },
+      {
+        "pagePath": "pages/deviceList/deviceList",
+        "text": "设备",
+        "iconPath": "images/icon_2_bom.png",
+        "selectedIconPath": "images/icon_2_top.png"
+      },
+      {
+        "pagePath": "pages/alarm/alarm",
+        "text": "告警",
+        "iconPath": "images/icon_3_bom.png",
+        "selectedIconPath": "images/icon_3_top.png"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

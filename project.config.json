@@ -21,7 +21,7 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": true,
+    "useMultiFrameRuntime": false,
     "useApiHook": true,
     "babelSetting": {
       "ignore": [],
@@ -33,12 +33,17 @@
     "userConfirmedUseCompilerModuleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "useApiHostProcess": false
+    "lazyloadPlaceholderEnable": false,
+    "useApiHostProcess": false,
+    "enableEngineNative": false,
+    "userConfirmedBundleSwitch": false,
+    "minifyWXSS": true,
+    "showES6CompileOption": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.4",
-  "appid": "wxa8f7a8c28d6ba44f",
-  "projectname": "%E6%98%8E%E8%AF%9A",
+  "appid": "wx420c79edae091c7a",
+  "projectname": "%E8%B4%A8%E4%BA%91%E5%B9%B3%E5%8F%B0",
   "debugOptions": {
     "hidedInDevtools": []
   },
@@ -53,17 +58,31 @@
     "conversation": {
       "list": []
     },
-    "game": {
+    "plugin": {
       "list": []
     },
-    "plugin": {
+    "game": {
       "list": []
     },
     "gamePlugin": {
       "list": []
     },
     "miniprogram": {
-      "list": []
+      "list": [
+        {
+          "id": -1,
+          "name": "pages/deviceInfo/deviceInfo",
+          "pathName": "pages/deviceInfo/deviceInfo",
+          "query": "deviceId=423c267139",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/testing/testing",
+          "pathName": "pages/testing/testing",
+          "scene": null
+        }
+      ]
     }
   }
 }

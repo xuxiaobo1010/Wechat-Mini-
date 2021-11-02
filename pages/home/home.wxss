@@ -2,7 +2,7 @@
   height: 380px;
   padding-left: 20px;
   padding-right: 20px;
-  background: -webkit-linear-gradient(top,#1c86fb,#3996fc,#ffffff);
+  background: -webkit-linear-gradient(top,#84d3be,#beeed9,#ffffff);
   }
   
 
@@ -41,6 +41,7 @@ position: relative;
   width: 28px;
   height: 28px;
   position: relative;
+  margin-left: 10px;
   }
 
   .horBoxView{
@@ -136,8 +137,6 @@ position: relative;
   border-radius: 6px;
   overflow: hidden;
   transform: translateY(0);
-
-
   }
 .slide-image{
   width: 100%;
@@ -145,7 +144,7 @@ position: relative;
 .btn2{
   height: 90px;
   margin-top: 15px;
-  background-color: #1784FC;
+  background-color: #84d3be;
   color: #ffffff;
   border-radius: 15rpx;
   display: flex;
@@ -157,7 +156,7 @@ position: relative;
 .button-hover{
   height: 90px;
   margin-top: 15px;
-  background-color: #3996fc;
+  background-color: #beeed9;
   color: #ffffff;
   border-radius: 15rpx;
   display: flex;

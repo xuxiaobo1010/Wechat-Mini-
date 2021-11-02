@@ -1,4 +1,5 @@
 // pages/addDevice/addDevice.js
+const app = getApp()
 Page({
 
   /**
@@ -8,18 +9,9 @@ Page({
     viewWidth:0,
     idx : 0,
     codeValue: '',
-    deviceTypeList:[
-      {'num':'我是第一个'},
-      { 'num': '我是第二个' },
-      { 'num': '我是第三个' },
-      { 'num': '我是第四个' },
-      { 'num': '我是第五个' },
-      {'num':'我是第六个'},
-      { 'num': '我是第七个' },
-      { 'num': '我是第八个' },
-      { 'num': '我是第九个' },
-      { 'num': '我是第十个' }  
-     ],
+    mLatitude:'',
+    mLongitude:'',
+    deviceTypeList:[],
   },
 
   /**
@@ -41,7 +33,33 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    var that = this
 
+    that.setData({
+      deviceTypeList:app.globalData.productList,
+    })
+
+    wx.getLocation({
+      type: 'wgs84',
+      success (res) {
+        console.log(res)
+        var getAddressUrl = "https://apis.map.qq.com/ws/geocoder/v1/?location=" 
+        + res.latitude + "," + res.longitude + "&key=TMWBZ-DBTRR-DQLWD-WRH4K-2VSGT-7RBK3";
+        that.longitude = res.longitude;
+        that.latitude = res.latitude
+        wx.request({          
+          url: getAddressUrl,
+          success: function (result) {        
+          console.log(result.data.result.address )      
+           that.setData({
+             mAddress: result.data.result.address,
+              mLatitude:res.latitude,
+              mLongitude:res.longitude
+           })
+          }        
+        })
+      }
+     })
   },
 
   /**
@@ -49,6 +67,20 @@ Page({
    */
   onShow: function () {
 
+  },
+
+  onOpenMap:function(){
+    var that = this
+    wx.chooseLocation({
+      success: function (res) {
+        console.log("res",res)
+        that.setData({
+          mAddress:res.address + res.name,
+          mLatitude:res.latitude,
+          mLongitude:res.longitude
+        })
+      }
+    })
   },
 
   /**
@@ -77,11 +109,79 @@ Page({
     })
    },
 
-     //用户名和密码输入框事件
-  userNameInput:function(e){
+     //输入框事件
+     codeInput:function(e){
     this.setData({
       codeValue:e.detail.value
     })
+  },
+
+  /**
+   * 去添加设备
+   */
+  goAddDevice:function(){
+    var that = this;
+
+    if (that.data.codeValue.trim().length == 0) {
+      that.anniu("请输入序列号");
+      return;
+    }
+
+    if( that.data.mAddress.trim().length == 0 ){
+      that.anniu("请先选择位置")
+    }
+
+
+    wx.showLoading()
+    wx.request({
+      url: app.globalData.httpUrl+'iotapi/adddevice', //仅为示例，并非真实的接口地址
+      method: 'POST',
+      data: {
+        devaddr:that.data.codeValue,
+        latitude: that.data.mLatitude,
+        longitude: that.data.mLongitude,
+        productid:that.data.deviceTypeList[that.data.idx].objectId
+      },
+      header: {
+        'content-type': 'application/json',// 默认值
+        'sessionToken': app.globalData.token//读取cookie // 默认值
+      },
+      success(res) {
+        wx.hideLoading({
+          success: (res) => {},
+        })
+        if( res.statusCode == 200 ){
+          setTimeout(item => {
+            wx.navigateBack({
+             delta: 1 //返回上一级页面
+            })
+           },1000)
+      }else{
+        wx.showToast({
+          title: '添加设备失败'
+        })
+      }
+      }
+    })
+
+  },
+
+  /**
+   * 显示错误信息
+   */
+  anniu: function (e) {
+    if (!this.data.show) {
+      let that = this;
+      this.setData({
+        show: 1,
+        showMsg: e,
+      })
+      setTimeout(function () {
+        that.setData({
+          show: 0
+        })
+      }, 2000)
+    }
   },
 
   /**

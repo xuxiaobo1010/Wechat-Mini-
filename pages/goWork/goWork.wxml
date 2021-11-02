@@ -1,0 +1,35 @@
+<text class="textView">设备类型： {{deviceProduct}}</text>
+<view class="linView"></view>
+<text class="textView">设备名称： {{deviceName}}</text>
+<view class="linView"></view>
+<view class="horView2">
+  <text class="textView">工单类型：</text>
+  <view class="page-section">
+    <radio-group bindchange="radioChange" class="rg">
+    <radio checked="true"  value='故障维修'>故障维修</radio>
+    <radio  value='设备移位'>设备移位</radio>
+  </radio-group>
+  </view>
+</view>
+<view class="linView"></view>
+<view class="horTopClass3">
+  <text class="textBlue2">工单描述:</text>
+  <textarea class="areaView"  bindinput='inputTilte2'  placeholder="请输入工单描述内容" />
+</view>
+<view class="horTopClass3">
+  <text class="textBlue2">图片附件:</text>
+</view>
+<view class="addImv">
+      <!--这个是已经选好的图片-->
+      <view wx:for="{{banner}}" wx:key="key" class="upFile" bindtap="showImageBanner" style="border-radius: 5px" data-id="{{index}}">
+        <image class="itemImv"   src="{{item}}"></image>
+        <image class="closeImv" src="../../images/delete.png" mode="scaleToFill" catchtap="deleteImvBanner" data-id="{{index}}"></image>
+      </view>
+ 
+      <!--这个是选择图片-->
+      <view class="chooseView" bindtap="chooseBanner" style="border-radius: 5px" wx:if="{{chooseViewShowBanner}}">
+        <image class="chooseImv" src="../../images/add.png"></image>
+      </view>
+    </view>
+
+    <button  class="btnView" bindtap="onOrder" style="width:90%" >提交工单</button>

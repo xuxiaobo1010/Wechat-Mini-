@@ -3,7 +3,7 @@
   margin-top: 10px;
 line-height: 18px;
 border-radius: 4px 4px 4px 4px;
-background-color: rgba(24, 144, 255, 100);
+background-color: #84d3be;
 text-align: center;
 display: flex;
 align-items: center;
@@ -38,6 +38,9 @@ color: #ffffff;
 .pickerView{
   width: 30%;
   height: 35px;
+}
+.cascaderView{
+  height: 300px;
 }
 
 .imgRightClass{
@@ -109,6 +112,22 @@ padding: 5px;
   border-radius: 6px 5px 6px 6px;
 background-color: #2FC589;
 }
+
+.cTextType2{
+  width: 45px;
+  height: 20px;
+  margin-top: 10px;
+  font-size: 12px;
+  text-align: center;
+  color: #FC4868 ;
+  margin-right: 10px;
+  line-height: 20px;
+  margin-left: 15px;
+  background-color: #f6d8e0;
+  border-radius: 6px 5px 6px 6px;
+background-color: #f6d8e0;
+}
+
 .iTextTitle{
 height: 40px;
 color: #101010;
@@ -117,7 +136,6 @@ line-height: 40px;
 margin-left: 10px;
 text-align: left;
 font-family: PingFangSC-regular;
-
 }
 .iTextName{
   font-size: 13px;

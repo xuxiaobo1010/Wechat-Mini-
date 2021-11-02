@@ -1,15 +1,36 @@
-<picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-    <view class="horTopView">
-      <text class="textBlue"> 选择账号所属部门　　　{{array[index]}}</text>
-      <image class="imgRightClass" src="../../images/img_right_go.png"></image>
+<view  class="horTopView">
+      <view class="horTopView"  bindtap="onOpen1">
+      <text class="textBlue"> 所属部门:{{title1}}</text>
+      <image  class="imgRightClass" src="../../images/img_right_go.png"></image>
     </view>
-  </picker>
+      <view class="addView"  bindtap="onShowView">新增</view>
+    </view>
+
+
+  <wux-cascader wux-class="cascaderView"  visible="{{ visible1 }}" default-value="{{ value1 }}" title="所属部门" 
+  options="{{ options1 }}" bind:close="onClose1" bind:change="onChange1"  />
 
 <view class="linerView"></view>
 
+
+<view wx:if="{{isShow}}">
+<view class="horView">
+  <text class="textName">　　部门:</text>
+  <input class="inputName" value="{{mNick}}" confirm-type="next" bindinput='inputTilte10' auto-focus placeholder=""/>
+</view>
+<view class="linerView"></view>
+<picker bindchange="bindPickerChange5" value="{{index8}}" range="{{gwList}}">
+  <view  class="horTopView">
+      <text class="textBlue">　　岗位:{{gwList[index8]}}</text>
+      <image  class="imgRightClass" src="../../images/img_right_go.png"></image>
+    </view>
+  </picker>
+
+  <view class="linerView"></view>
+</view>
 <view class="horView">
   <text class="textName">姓　　名:</text>
-  <input class="inputName" value="{{mName}}" confirm-type="next" bindinput='inputTilte1' auto-focus placeholder=""/>
+  <input class="inputName" value="{{mNick}}" confirm-type="next" bindinput='inputTilte1' auto-focus placeholder=""/>
 </view>
 
 <view class="linerView"></view>
@@ -17,6 +38,26 @@
 <view class="horView">
   <text class="textName">手机号码:</text>
   <input class="inputName" value="{{mPhone}}" type="number" bindinput='inputTilte2' confirm-type="done" maxlength="11"  placeholder=""/>
+</view>
+
+<view class="horView">
+  <text class="textName">邮　　箱:</text>
+  <input class="inputName" value="{{mEmail}}" type="text" bindinput='inputTilte3'   placeholder=""/>
+</view>
+
+<view class="horView">
+  <text class="textName">账　　号:</text>
+  <input class="inputName" value="{{mUser}}" type="text" bindinput='inputTilte4'   placeholder=""/>
+</view>
+
+<view class="horView">
+  <text class="textName">密　　码:</text>
+  <input class="inputName" value="{{mPwd}}" type="text" bindinput='inputTilte5'   placeholder=""/>
+</view>
+
+<view class="horView">
+  <text class="textName">确认密码:</text>
+  <input class="inputName" value="{{mPwd2}}" type="text" bindinput='inputTilte6'   placeholder=""/>
 </view>
 
 <button class='btnAddView' bindtap="onSaveUser" style="width:90%" >

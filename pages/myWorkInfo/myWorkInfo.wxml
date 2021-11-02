@@ -1,0 +1,88 @@
+<view class="horTopClass">
+        <text class='iTextTitle'>{{item.info.devicename}}</text>
+        <text class='iTextTitle2'>（ {{item.type}} ）</text>
+        <text class='cTextType2' wx:if="{{item.status == 0}}">待分配</text>
+        <text class='cTextType1' wx:if="{{item.status == 1}}">待处理</text>
+        <text class='cTextType3' wx:if="{{item.status == 2}}">已处理</text>
+        <text class='cTextType4' wx:if="{{item.status == 3}}">已结单</text>
+      </view>
+
+      <view class="verView2">
+          <text class='iTextName'>设备编号:{{item.objectId}}</text>
+          <text class='iTextName'>设备名称:{{item.info.devicename}}</text>
+          <text class='iTextName'>建单时间:{{item.createdAt}}</text>
+          <text class='iTextName'>建单用户:{{item.info.createdname}}</text>
+          <text class='iTextName'>联系电话:{{item.info.createdphone}}</text>
+        </view>
+        <view class="verView3">
+        <text class='iTextName'>工单描述</text>
+        <text class='iTextName'>{{item.info.description}}</text>
+        </view>
+
+        <!-- <wux-grids col="3" wx:for="{{item.info.photo}}">
+            <wux-grid wux-class="imgView" >
+               <image class="imgView2" mode="heightFix" data-index='{{item}}' bindtap="seeImg" src="{{item}}"></image>
+            </wux-grid>
+        </wux-grids> -->
+        <!-- <view class="horBoxView" wx:for="{{item.info.photo}}">
+          <image class="imgView2" mode="heightFix" data-index='{{item}}' bindtap="seeImg" src="{{item}}"></image>
+          </view> -->
+          <!-- 轮播图 -->
+ <swiper class="swiper" wx:if="{{item.info.photo.length > 0}}" indicator-dots="{{indicatorDots}}"
+ autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#ffffff" circular="{{circular}}">
+ <block wx:for="{{item.info.photo}}" >
+ <swiper-item>
+ <image src="{{item}}" class="slide-image" data-index='{{item}}' bindtap="seeImg"/>
+ </swiper-item>
+ </block>
+ </swiper>
+
+        <wux-steps  wux-class="stepsView" current="{{item.status}}">
+            <wux-step title="创建工单"></wux-step>
+            <wux-step title="派单"></wux-step>
+            <wux-step title="处理"></wux-step>
+            <wux-step title="结单"></wux-step>
+        </wux-steps>
+
+        <picker class="pickerView"  disabled="{{item.status != 0}}"  bindchange="bindPickerChange2" value="{{index}}" range="{{cUserList}}">
+    <view class="horTopView">
+      <text class="textBlue2"> 维保人员:</text>
+      <text class="textBlue2" wx:if="{{item.status == 0}}" > {{cUserList[index]}}</text>
+      <text class="textBlue2"  wx:if="{{item.status != 0}}">{{item.info.receiveusername}} </text>
+      <image class="imgRightClass2" wx:if="{{item.status == 0}}" src="../../images/img_right_go.png"></image>
+    </view>
+  </picker>
+
+<view class="horTopClass2">
+  <text class="textBlue2"> 客户备注:</text>
+  <text class="textBlue2"  wx:if="{{item.status != 0}}"> {{item.info.step1.Remarks}}</text>
+</view>
+
+
+<view class="horTopClass3">
+  <text class="textBlue2" wx:if="{{item.status == 1}}"> 处理结果:</text>
+  <textarea class="areaView"  wx:if="{{item.status == 1}}" bindinput='inputTilte2'  placeholder="请输入处理记录内容" />
+</view>
+
+<button class='btnView1' wx:if="{{item.status == 1}}" bindtap="onEndOrder"  style="width:80%">
+    <text  class="textTitle3">确认处理</text>
+ </button>
+
+<!-- <button class='btnView1' wx:if="{{item.status == 0}}" bindtap="onMaintenance"  style="width:80%">
+    <text  class="textTitle3">派单</text>
+ </button> -->
+ <!-- <button class='btnView2' wx:if="{{item.status == 0}}" bindtap="onDeleteOrder"  style="width:80%">
+    <text  class="textTitle4">删除工单</text>
+ </button> -->
+
+ <view class="verView4">
+ <text class="textBlue3"  wx:if="{{item.status == 2 || item.status == 3}}"> 处理时间:{{item.info.timeline[2].timestamp}}</text>
+ <text class="textBlue3"  wx:if="{{item.status == 2 || item.status == 3}}"> 处理结果:{{item.info.step2.Remarks}}</text>
+</view>
+
+<!-- <textarea class="areaView"  wx:if="{{item.status == 2}}" bindinput='inputTilte3'  placeholder="请对此次工单处理做结单评价!" />
+<button class='btnView1' wx:if="{{item.status == 2}}" bindtap="onEndOrder"  style="width:80%">
+    <text  class="textTitle3">结单</text>
+ </button> -->
+
+ <text class="textBlue2"  style="margin-left:15px" wx:if="{{item.status == 3}}"> 服务评价:{{item.info.step3.Remarks}}</text>

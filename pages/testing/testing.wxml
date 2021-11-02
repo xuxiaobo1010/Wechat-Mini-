@@ -1,0 +1,57 @@
+<!--pages/testing/testing.wxml-->
+<view class="testing" bindtouchstart='touchStart' bindtouchend="touchEnd">
+  <image src="{{imgs[current]}}" mode="widthFix">
+  </image>
+  <view class="btn" bindtap="handleShow" style="top:{{top1+'px'}};left:{{left1+'px'}}">
+    <image class="img" src="../../images/tv.png"></image>
+    <view class="num">
+      {{imgs.length}}
+    </view>
+  </view>
+  <view class="btn" bindtap="handleVideoShow" style="top:{{top2+'px'}};left:{{left2+'px'}}">
+    <image class="img" src="../../images/exec.png"></image>
+    <view class="num">
+      {{imgs.length}}
+    </view>
+  </view>
+  <view class="upload" wx:if="{{isShow}}">
+    <view class="load-top">
+      <view>图片 上传</view>
+      <view bindtap="handleShow">×</view>
+    </view>
+    <scroll-view scroll-y style="height:90px;border-bottom: 0.5px solid #ebebeb;">
+    <view class="load-content">
+      <view class="item" wx:for="{{imgs}}" wx:key="index">
+        <image src="{{item}}">
+        </image>
+      </view>
+      <view class="img-upload" bindtap="upLoad">
+        +
+      </view>
+    </view>
+  </scroll-view>
+    <view class="load-bottom">
+      <button class="close" bindtap="handleShow">关闭</button>
+    </view>
+  </view>
+  <view class="upload" wx:if="{{isVideoShow}}">
+    <view class="load-top">
+      <view>视频 上传</view>
+      <view bindtap="handleVideoShow">×</view>
+    </view>
+    <scroll-view scroll-y style="height:90px;border-bottom:0.5px solid #ebebeb;">
+    <view class="load-content">
+      <view class="item" wx:for="{{videoList}}" wx:key="index">
+        <video class="video" src="{{item}}"></video>
+      </view>
+      <view class="img-upload" bindtap="videoUpload">
+        +
+      </view>
+    </view>
+  </scroll-view>
+    <view class="load-bottom">
+      <button class="close" bindtap="handleVideoShow">关闭</button>
+    </view>
+  </view>
+
+</view>
